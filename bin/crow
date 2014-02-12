@@ -1,0 +1,45 @@
+#!/usr/local/bin/node
+
+function printUsage() {
+  console.log('')
+  console.log('usage:')
+  console.log('    crow <config_file.json>')
+  console.log('')
+}
+
+if(process.argv.length < 3 || process.argv.length > 4) {
+  printUsage()
+  process.exit(1)
+}
+
+var configFilePath = process.argv[process.argv.length -1]
+
+var fs = require('fs')
+
+var Crow = require(__dirname + '/../index.js')
+
+if(!fs.existsSync(configFilePath)) {
+
+  console.error('Error: could not find file at ['+configFilePath+']')
+  printUsage()
+  process.exit(1)
+}
+
+var configStr = fs.readFileSync(configFilePath)
+
+try {
+  var config = JSON.parse(configStr)
+} catch(parseError) {
+  console.error('File at ['+configFilePath+'] is not proper JSON')
+  process.exit(1)
+}
+
+
+var crow = new Crow(config)
+
+crow.run(function(terminalFormattedResults, allPass) {
+  console.log(terminalFormattedResults)
+  if(!allPass) {
+    process.exit(1)
+  }
+})

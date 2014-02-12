@@ -1,0 +1,18 @@
+[
+  {
+    "protocol": "https",
+    "domain": "google.com",
+    "port": 443,
+    "path": "/"
+  }, {
+    "protocol": "http",
+    "domain": "google.com",
+    "port": 80,
+    "path": "/"
+  }, {
+    "protocol": "http",
+    "domain": "nowhere",
+    "port": 80,
+    "path": "/"
+  }
+]

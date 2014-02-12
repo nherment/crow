@@ -37,6 +37,10 @@ try {
 
 var crow = new Crow(config)
 
+if(config.length > 1) {
+  crow.showProgress(true)
+}
+
 crow.run(function(terminalFormattedResults, allPass) {
   console.log(terminalFormattedResults)
   if(!allPass) {

@@ -8,11 +8,13 @@ Crow will exit with a non-zero exit code if one of the tests failed.
 
 ## Installation
 
-    npm i -g crow
+```
+  npm i -g crow
+```
 
 ## Config file
 
-```remotes.json```
+File ```remotes.json```
 
 
 ```

@@ -14,6 +14,8 @@ Crow will exit with a non-zero exit code if one of the tests failed.
 
 ```remotes.json```
 
+
+
     [
       {
         "protocol": "https",
@@ -53,6 +55,8 @@ Crow will exit with a non-zero exit code if one of the tests failed.
 
 
 ## Example
+
+The URLs are alphabetically ordered by domain, port and path
 
     ➜  ~  crow remotes.json
     ┌──────────────────────────────┬─────────────────────────────────┬────────┐

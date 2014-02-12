@@ -1,6 +1,6 @@
 {
   "name": "crow",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "a remote URL tester for the terminal",
   "main": "index.js",
   "scripts": {

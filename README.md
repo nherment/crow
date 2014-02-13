@@ -116,8 +116,8 @@ Same as ```--ipv4``` but for IP v6 addresses.
 ### 0.2.1
 
 - added progress feedback and the ability to disable it
-- added ability to display a column containing the IP v4 address of the server ``--ipv4```
-- added ability to display a column containing the IP v6 address of the server ``--ipv6```
+- added ability to display a column containing the IP v4 address of the server ```--ipv4```
+- added ability to display a column containing the IP v6 address of the server ```--ipv6```
 - delays greater than 1000ms are displayed in bold red
 - error statuses are displayed in bold red
 

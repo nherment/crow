@@ -3,16 +3,27 @@
 function printUsage() {
   console.log('')
   console.log('usage:')
-  console.log('    crow <config_file.json>')
+  console.log('    crow [options] <config_file.json>')
+  console.log('')
+  console.log('options:')
+  console.log('    --no-progress      do not show progress')
+  console.log('    --ipv4             adds a column to display "A" DNS records')
+  console.log('    --ipv6             adds a column to display "AAAA" DNS records')
   console.log('')
 }
 
-if(process.argv.length < 3 || process.argv.length > 4) {
+var argh = require('argh')
+
+var arguments = argh.argv
+
+//console.log(arguments)
+
+if(arguments.h || arguments.help || !arguments.argv || arguments.argv.length !== 1) {
   printUsage()
   process.exit(1)
 }
 
-var configFilePath = process.argv[process.argv.length -1]
+var configFilePath = arguments.argv[0]
 
 var fs = require('fs')
 
@@ -23,6 +34,7 @@ if(!fs.existsSync(configFilePath)) {
   console.error('Error: could not find file at ['+configFilePath+']')
   printUsage()
   process.exit(1)
+
 }
 
 var configStr = fs.readFileSync(configFilePath)
@@ -34,10 +46,16 @@ try {
   process.exit(1)
 }
 
-
 var crow = new Crow(config)
 
-if(config.length > 1) {
+if(arguments.ipv4) {
+  crow.showIPv4(true)
+}
+if(arguments.ipv6) {
+  crow.showIPv6(true)
+}
+
+if(config.length > 1 && arguments.progress !== false) {
   crow.showProgress(true)
 }
 

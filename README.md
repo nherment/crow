@@ -69,3 +69,55 @@ File ```remotes.json```
     }
   ]
 ```
+
+## Options
+
+### --help | -h
+
+Displays usage information.
+
+```
+  usage:
+      crow [options] <config_file.json>
+
+  options:
+      --no-progress      do not show progress
+      --ipv4             adds a column to display "A" DNS records
+```
+
+### --no-progress
+
+Disables the progress 'dots'.
+
+When running, crow displays a single 'dot' ```.``` for each server reached. This option
+disables the display of the progress 'dots'.
+
+### --ipv4
+
+Displays a column with the IPv4 address of the server.
+
+```
+  ~ crow remotes.json --ipv4
+  ┌───────────────────────────────────┬────────┬─────────────────────────────────┬────────┬────────────────┐
+  │ URI                               │ Method │ Status                          │ Delay  │ IP Address     │
+  ├───────────────────────────────────┼────────┼─────────────────────────────────┼────────┼────────────────┤
+  │ https://arkhaios.net/             │ GET    │ UNABLE_TO_VERIFY_LEAF_SIGNATURE │ 180ms  │ 144.76.221.102 │
+  ├───────────────────────────────────┼────────┼─────────────────────────────────┼────────┼────────────────┤
+  │ https://elipsis.io/               │ GET    │ ok                              │ 268ms  │ 144.76.221.102 │
+  └───────────────────────────────────┴────────┴─────────────────────────────────┴────────┴────────────────┘
+```
+
+### --ipv6
+
+Same as ```--ipv4``` but for IP v6 addresses.
+
+## Changelog
+
+### 0.2.1
+
+- added progress feedback and the ability to disable it
+- added ability to display a column containing the IP v4 address of the server ``--ipv4```
+- added ability to display a column containing the IP v6 address of the server ``--ipv6```
+- delays greater than 1000ms are displayed in bold red
+- error statuses are displayed in bold red
+

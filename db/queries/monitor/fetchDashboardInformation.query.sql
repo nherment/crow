@@ -19,7 +19,7 @@ WITH monitor_status AS (
     CASE WHEN d.uptime IS NOT NULL THEN 
       TRUNC(d.uptime::NUMERIC, 5) * 100
     ELSE 
-      NULL
+      100
     END AS uptime
   FROM (
     SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(fr.closed_date, NOW()) - (CASE WHEN fr.created_date > NOW() - INTERVAL '24 hours' THEN fr.created_date ELSE NOW() - INTERVAL '24 hours' END)) / EXTRACT(EPOCH FROM INTERVAL '24 hours')) AS uptime
@@ -32,7 +32,7 @@ WITH monitor_status AS (
     CASE WHEN d.uptime IS NOT NULL THEN 
       TRUNC(d.uptime::NUMERIC, 5) * 100
     ELSE 
-      NULL
+      100
     END AS uptime
   FROM (
     SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(fr.closed_date, NOW()) - (CASE WHEN fr.created_date > NOW() - INTERVAL '7 days' THEN fr.created_date ELSE NOW() - INTERVAL '7 days' END)) / EXTRACT(EPOCH FROM INTERVAL '7 days')) AS uptime
@@ -45,7 +45,7 @@ WITH monitor_status AS (
     CASE WHEN d.uptime IS NOT NULL THEN 
       TRUNC(d.uptime::NUMERIC, 5) * 100
     ELSE 
-      NULL
+      100
     END AS uptime
   FROM (
     SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(fr.closed_date, NOW()) - (CASE WHEN fr.created_date > NOW() - INTERVAL '30 days' THEN fr.created_date ELSE NOW() - INTERVAL '30 days' END)) / EXTRACT(EPOCH FROM INTERVAL '30 days')) AS uptime
@@ -58,7 +58,7 @@ WITH monitor_status AS (
     CASE WHEN d.uptime IS NOT NULL THEN 
       TRUNC(d.uptime::NUMERIC, 5) * 100
     ELSE 
-      NULL
+      100
     END AS uptime
   FROM (
     SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(fr.closed_date, NOW()) - (CASE WHEN fr.created_date > NOW() - INTERVAL '1 year' THEN fr.created_date ELSE NOW() - INTERVAL '1 year' END)) / EXTRACT(EPOCH FROM INTERVAL '1 year')) AS uptime

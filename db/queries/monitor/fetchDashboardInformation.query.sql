@@ -22,9 +22,10 @@ WITH monitor_status AS (
       NULL
     END AS uptime
   FROM (
-    SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(closed_date, NOW()) - (CASE WHEN created_date > NOW() - INTERVAL '24 hours' THEN created_date ELSE NOW() - INTERVAL '24 hours' END)) / EXTRACT(EPOCH FROM INTERVAL '24 hours')) AS uptime
-    FROM failure_reports 
-    WHERE monitor_id = 1 AND created_date > NOW() - INTERVAL '24 hours' OR closed_date > NOW() - INTERVAL '24 hours'
+    SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(fr.closed_date, NOW()) - (CASE WHEN fr.created_date > NOW() - INTERVAL '24 hours' THEN fr.created_date ELSE NOW() - INTERVAL '24 hours' END)) / EXTRACT(EPOCH FROM INTERVAL '24 hours')) AS uptime
+    FROM failure_reports AS fr
+    INNER JOIN monitors AS m ON m.id = fr.monitor_id
+    WHERE m.name = 'Production' AND fr.created_date > NOW() - INTERVAL '24 hours' OR fr.closed_date > NOW() - INTERVAL '24 hours'
   ) AS d
 ), week_uptime AS (
   SELECT 
@@ -34,9 +35,10 @@ WITH monitor_status AS (
       NULL
     END AS uptime
   FROM (
-    SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(closed_date, NOW()) - (CASE WHEN created_date > NOW() - INTERVAL '7 days' THEN created_date ELSE NOW() - INTERVAL '7 days' END)) / EXTRACT(EPOCH FROM INTERVAL '7 days')) AS uptime
-    FROM failure_reports 
-    WHERE monitor_id = 1 AND created_date > NOW() - INTERVAL '7 days' OR closed_date > NOW() - INTERVAL '7 days'
+    SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(fr.closed_date, NOW()) - (CASE WHEN fr.created_date > NOW() - INTERVAL '7 days' THEN fr.created_date ELSE NOW() - INTERVAL '7 days' END)) / EXTRACT(EPOCH FROM INTERVAL '7 days')) AS uptime
+    FROM failure_reports AS fr
+    INNER JOIN monitors AS m ON m.id = fr.monitor_id
+    WHERE m.name = 'Production' AND fr.created_date > NOW() - INTERVAL '7 days' OR fr.closed_date > NOW() - INTERVAL '7 days'
   ) AS d
 ), month_uptime AS (
   SELECT 
@@ -46,9 +48,10 @@ WITH monitor_status AS (
       NULL
     END AS uptime
   FROM (
-    SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(closed_date, NOW()) - (CASE WHEN created_date > NOW() - INTERVAL '30 days' THEN created_date ELSE NOW() - INTERVAL '30 days' END)) / EXTRACT(EPOCH FROM INTERVAL '30 days')) AS uptime
-    FROM failure_reports 
-    WHERE monitor_id = 1 AND created_date > NOW() - INTERVAL '30 days' OR closed_date > NOW() - INTERVAL '30 days'
+    SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(fr.closed_date, NOW()) - (CASE WHEN fr.created_date > NOW() - INTERVAL '30 days' THEN fr.created_date ELSE NOW() - INTERVAL '30 days' END)) / EXTRACT(EPOCH FROM INTERVAL '30 days')) AS uptime
+    FROM failure_reports  AS fr
+    INNER JOIN monitors AS m ON m.id = fr.monitor_id
+    WHERE m.name = 'Production' AND fr.created_date > NOW() - INTERVAL '30 days' OR fr.closed_date > NOW() - INTERVAL '30 days'
   ) AS d
 ), year_uptime AS (
   SELECT 
@@ -58,9 +61,10 @@ WITH monitor_status AS (
       NULL
     END AS uptime
   FROM (
-    SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(closed_date, NOW()) - (CASE WHEN created_date > NOW() - INTERVAL '1 year' THEN created_date ELSE NOW() - INTERVAL '1 year' END)) / EXTRACT(EPOCH FROM INTERVAL '1 year')) AS uptime
-    FROM failure_reports 
-    WHERE monitor_id = 1 AND created_date > NOW() - INTERVAL '1 year' OR closed_date > NOW() - INTERVAL '1 year'
+    SELECT 1 - SUM(EXTRACT(EPOCH FROM COALESCE(fr.closed_date, NOW()) - (CASE WHEN fr.created_date > NOW() - INTERVAL '1 year' THEN fr.created_date ELSE NOW() - INTERVAL '1 year' END)) / EXTRACT(EPOCH FROM INTERVAL '1 year')) AS uptime
+    FROM failure_reports AS fr
+    INNER JOIN monitors AS m ON m.id = fr.monitor_id
+    WHERE m.name = 'Production' AND fr.created_date > NOW() - INTERVAL '1 year' OR fr.closed_date > NOW() - INTERVAL '1 year'
   ) AS d
 ), active_alerts AS (
   SELECT 

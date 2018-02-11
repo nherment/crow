@@ -1,7 +1,7 @@
 {
   "name": "crow",
-  "version": "0.2.1",
-  "description": "a remote URL tester for the terminal",
+  "version": "1.0.0",
+  "description": "a web monitor (think monit) with SMS and email notifications",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -17,21 +17,35 @@
     "remote",
     "uptime"
   ],
-  "author": "Nicoals Herment <nherment@gmail.com>",
+  "author": "Nicolas Herment <nherment@arkhaios.net>",
   "license": "MIT License",
   "bugs": {
     "url": "https://github.com/nherment/crow/issues"
   },
-  "bin": {
-    "crow": "./bin/crow"
-  },
   "dependencies": {
-    "request": "~2.33.0",
-    "underscore": "~1.6.0",
-    "mocha": "~1.17.1",
-    "cli-table": "~0.3.0",
-    "argh": "~0.1.1",
-    "step": "0.0.5",
-    "colors": "~0.6.2"
+    "@lasso/marko-taglib": "1.0.9",
+    "body-parser": "1.18.2",
+    "compression": "1.7.1",
+    "cookie-parser": "1.4.3",
+    "express": "4.16.2",
+    "express-rate-limit": "2.11.0",
+    "lasso": "3.1.2",
+    "lasso-clean-css": "2.0.0",
+    "lasso-marko": "2.4.0",
+    "lasso-sass": "3.0.0",
+    "lodash": "4.17.5",
+    "logacious": "0.3.0",
+    "marko": "4.7.5",
+    "node-sass": "4.7.2",
+    "node-watch": "0.5.7",
+    "nodemailer": "4.4.2",
+    "nodemailer-mailgun-transport": "1.3.6",
+    "pg": "^7.4.1",
+    "pg-js": "0.6.0",
+    "postgrator": "3.4.0",
+    "twilio": "3.11.3"
+  },
+  "devDependencies": {
+    "jshint": "2.9.5"
   }
 }

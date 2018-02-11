@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS failure_reports;
+DROP TABLE IF EXISTS status_checks;
+DROP TABLE IF EXISTS status_checks_hourly;
+DROP TABLE IF EXISTS status_checks_daily;
+DROP TABLE IF EXISTS monitors;
+DROP TABLE IF EXISTS configuration;
+DROP TABLE IF EXISTS logs;
+DROP TABLE IF EXISTS sessions;
+DROP TABLE IF EXISTS users;

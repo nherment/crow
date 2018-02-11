@@ -1,0 +1,13 @@
+
+.dashboard {
+  table {
+    td.danger {
+      background-color: red;
+      color: white;
+      font-weight: bold;
+    }
+    td.success {
+      background-color: green;
+    }
+  }
+}

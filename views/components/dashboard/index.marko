@@ -1,0 +1,44 @@
+<div class="dashboard">
+  <table width="100%">
+    <thead>
+      <tr>
+        <td>
+          Monitor
+        </td>
+        <td>
+          URL
+        </td>
+        <td>
+          Expected status code
+        </td>
+        <td>
+          Last check
+        </td>
+        <td>
+          Status
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <for (monitor in input.monitorStatusList)>>
+      <tr>
+        <td>
+          ${monitor.name}
+        </td>
+        <td>
+          ${monitor.url}
+        </td>
+        <td>
+          ${monitor.expectedStatusCode}
+        </td>
+        <td>
+          ${monitor.lastCheck}
+        </td>
+        <td class="${monitor.isUp ? 'success' : 'danger'}">
+          ${monitor.isUp ? 'UP' : 'DOWN'}
+        </td>
+      </tr>
+      </for>
+    </tbody>
+  </table>
+</div>

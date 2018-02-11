@@ -1,44 +1,136 @@
 <div class="dashboard">
-  <table width="100%">
-    <thead>
-      <tr>
-        <td>
-          Monitor
-        </td>
-        <td>
-          URL
-        </td>
-        <td>
-          Expected status code
-        </td>
-        <td>
-          Last check
-        </td>
-        <td>
-          Status
-        </td>
-      </tr>
-    </thead>
-    <tbody>
-      <for (monitor in input.monitorStatusList)>>
-      <tr>
-        <td>
-          ${monitor.name}
-        </td>
-        <td>
-          ${monitor.url}
-        </td>
-        <td>
-          ${monitor.expectedStatusCode}
-        </td>
-        <td>
-          ${monitor.lastCheck}
-        </td>
-        <td class="${monitor.isUp ? 'success' : 'danger'}">
-          ${monitor.isUp ? 'UP' : 'DOWN'}
-        </td>
-      </tr>
-      </for>
-    </tbody>
-  </table>
+  <div class="row around-xs app-header">
+    <div class="col-xs-2">
+      <div class="box panel uptime">
+        <div class="title">
+          1 year uptime
+        </div>
+        <div class="content">
+          ${input.yearUptime ? input.yearUptime : '-'}
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <div class="box panel uptime">
+        <div class="title">
+          30 days uptime
+        </div>
+        <div class="content">
+          ${input.monthUptime ? input.monthUptime : '-'}
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <div class="box panel uptime">
+        <div class="title">
+          7 days uptime
+        </div>
+        <div class="content">
+          ${input.weekUptime ? input.weekUptime : '-'}
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <div class="box panel uptime">
+        <div class="title">
+          24 hours uptime
+        </div>
+        <div class="content">
+          ${input.dayUptime ? input.dayUptime : '-'}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <for (monitor in input.monitorStatusList)>
+    <div class="row monitor ${monitor.isUp ? 'success' : 'danger'}">
+        <div class="col-xs-1">
+          <div class="box">
+            <b>${monitor.name}</b>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="box">
+            ${monitor.url}
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="box">
+            Last checked at <date value=monitor.lastCheck/>
+          </div>
+        </div>
+    </div>
+  </for>
+  
+  <div class="row panel section-separator">
+    <div class="col-xs-12">
+      <div class="box">
+        Active alerts
+      </div>
+    </div>
+  </div>
+  <if(!input.activeAlerts)>
+    <div class="row alert">
+      <div class="col-xs-12">
+        <div class="box">
+          There are no active alerts
+        </div>
+      </div>
+    </div>
+  </if>
+  <for (alert in input.activeAlerts)>
+    <div class="row alert ${alert.closedDate ? 'success' : 'danger'}">
+        <div class="col-xs-1">
+          <div class="box">
+            <b>${alert.monitorName}</b>
+          </div>
+        </div>
+        <div class="col-xs-1">
+          <div class="box">
+            <date value=alert.createdDate/>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="box">
+            ${alert.details}
+          </div>
+        </div>
+    </div>
+  </for>
+  
+  <div class="row panel section-separator">
+    <div class="col-xs-12">
+      <div class="box">
+        Closed alerts
+      </div>
+    </div>
+  </div>
+  <if(!input.closedAlerts)>
+    <div class="row alert">
+      <div class="col-xs-12">
+        <div class="box">
+          There are no closed alerts
+        </div>
+      </div>
+    </div>
+  </if>
+  <for (alert in input.closedAlerts)>
+    <div class="row alert">
+        <div class="col-xs-1">
+          <div class="box">
+            <b>${alert.monitorName}</b>
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="box">
+            <date value=alert.createdDate/> - <date value=alert.closedDate format="MM-DD HH:mm"/>
+          </div>
+        </div>
+        <div class="col-xs-7">
+          <div class="box">
+            ${alert.details}
+          </div>
+        </div>
+    </div>
+  </for>
 </div>

@@ -1,13 +1,42 @@
 
 .dashboard {
-  table {
-    td.danger {
-      background-color: red;
-      color: white;
-      font-weight: bold;
+  background-color: #FAFBFD;
+  padding: 10px 0;
+  .panel {
+    padding: 16px;
+    background-color: white;
+    border: solid 1px #f1f1f1;
+    border-top: solid 2px #0488F4;
+  }
+  .danger {
+    background-color: rgb(255, 103, 103);
+  }
+  .success {
+    background-color: rgb(155, 209, 155);
+  }
+  .uptime {
+    min-width: 150px;
+    .title {
+      text-align: left;
+      font-size: 18px;
+      margin-bottom: 16px;
     }
-    td.success {
-      background-color: green;
+    .content {
+      text-align: center;
+      font-size: 32px;
     }
+  }
+  .monitor {
+    margin: 16px 0;
+    padding: 8px 0;
+  }
+  .alert {
+    margin: 4px 0;
+    padding: 8px 0;
+  }
+  .section-separator {
+    margin: 32px 0 8px 0;
+    font-size: 16px;
+    font-weight: bold;
   }
 }

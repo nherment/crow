@@ -4,7 +4,8 @@
   "description": "a web monitor (think monit) with SMS and email notifications",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

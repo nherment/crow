@@ -1,0 +1,3 @@
+ALTER TABLE monitors DROP COLUMN IF EXISTS deleted;
+ALTER TABLE monitors DROP COLUMN IF EXISTS notify_email;
+ALTER TABLE monitors DROP COLUMN IF EXISTS notify_sms;

@@ -1,0 +1,35 @@
+<div class="account-menu">
+  <if(state.user)>
+    <div class="top-menu-item">
+      <div class="label">
+        ${state.user.email}
+      </div>
+      <div class="menu-content">
+        <ul>
+          <li><a href="/account">Account</a></li>
+          <li><a href="/settings">Monitors</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </if>
+  <else>
+    <div class="top-menu-item" on-click('openSignInForm')>
+      <div class="label ${state.showSignInForm ? 'active' : ''}">Sign in</div>
+      <div class="sign-in-dropdown" if(state.showSignInForm)>
+        <form action="/login" method="POST">
+          <div class="group">
+            <input key="emailField" type="email" name="email" required="required"><span class="highlight"></span><span class="bar"></span>
+            <label>Email</label>
+          </div>
+          <div class="group">
+            <input key="passwordField" type="password" name="password" required="required"/><span class="highlight"></span><span class="bar"></span>
+            <label>Password</label>
+          </div>
+          <button class="submit" on-click('onSignIn')>Sign in</button>
+          <button class="cancel" on-click('cancelSignIn')>Cancel</button>
+        </form>
+      </div>
+    </div>
+  </else>
+</div>

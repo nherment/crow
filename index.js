@@ -15,6 +15,7 @@ const url = require('url')
 const cluster = require('./lib/cluster.js')
 const RateLimit = require('express-rate-limit')
 const os = require('os')
+const conf = require('./lib/conf.js')
 
 const migrations = require('./lib/migrations.js')
 const monitoringWorker = require('./lib/monitor/MonitoringWorker.js')
@@ -60,7 +61,9 @@ function startWebServer(callback) {
   app.enable('trust proxy', 'loopback')
   app.disable('x-powered-by')
    
-  app.use(limiter)
+  if(conf.isProduction) {
+    app.use(limiter)
+  }
   
   app.use(compression())
   app.use(function(req, res, next) {
@@ -88,17 +91,19 @@ function startWebServer(callback) {
     next()
   })
 
-          
+
   app.use(utils.errorResponse)
-  app.use(appPublic)
   auth.setupSessions(app)
   auth.pullUserFromSession(app)
-  app.use(appPrivate)
-  
+  app.use(appPublic)
+          
   app.use(express.static(path.join(__dirname, 'public'), {
     etag: false
   }))
   app.use(require('lasso/middleware').serveStatic());
+  
+  app.use(appPrivate)
+  
 
 
   let port = process.env.PORT || 3000

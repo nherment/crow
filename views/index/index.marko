@@ -8,7 +8,18 @@
 </head>
 <body>
     <app-header ${input} />
-    <dashboard ${input} />
+    <if(input.query && input.query.err)>
+      <div class="alert danger">${input.query.err}</div>
+    </if>
+    <if(input.page === 'settings')>
+        <settings ${input} />
+    </if>
+    <else-if(input.page === 'account')>
+        <account ${input} />
+    </else-if>
+    <else>
+        <dashboard ${input} />
+    </else>
     <lasso-body/>
 </body>
 </html>

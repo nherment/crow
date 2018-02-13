@@ -14,6 +14,7 @@ WITH monitor_status AS (
     FROM status_checks AS sc 
     WHERE sc.monitor_id = m.id
   ) AS most_recent_status_check ON 1=1
+  WHERE m.deleted = FALSE
 ), day_uptime AS (
   SELECT 
     CASE WHEN d.uptime IS NOT NULL THEN 

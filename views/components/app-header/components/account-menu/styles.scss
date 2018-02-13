@@ -1,0 +1,46 @@
+.account-menu {
+  position: relative;
+  .top-menu-item {
+    .label {
+      color: #222222;
+      cursor: pointer;
+      &:hover,
+      &.active {
+        color: #2196F3;
+      }
+    }
+    .menu-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      border: solid 1px #2196F3;
+      width: 100%;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+          padding: 8px;
+          margin: 0;
+        }
+      }
+    }
+    &:hover .menu-content {
+      display: block;
+    }
+  }
+  .sign-in-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: solid 1px #2196F3;
+    border-radius: 3px;
+    padding: 16px;
+    button {
+      margin-left: 8px;
+    }
+  }
+}

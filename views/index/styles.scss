@@ -8,3 +8,167 @@ body {
   background-color: white;
   color: #222222;
 }
+
+// VARIABLES // ============================== //
+$bg-color: #424242;
+$hl-color: #2196F3;
+$muted-color: $bg-color;
+$trans-time: 300ms;
+$width: 320px;
+
+div.alert.danger {
+  padding: 8px;
+  background-color: #b11111;
+  color: white;
+}
+
+// FORM // ============================== //
+form.vertical {
+  width: $width;
+  margin: 8px auto;
+
+  .box {
+    text-align: center;
+    margin: 50px 0;
+  }
+}
+
+
+.group {
+  position: relative;
+  margin: 16px 0;
+}
+
+// INPUTS // ============================== //
+textarea {
+  resize: none;
+}
+
+input,
+textarea {
+  background: none;
+  background-color: #FFFFFF;
+  color: $muted-color;
+  font-size: 14px;
+  padding: 4px 4px 4px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid $muted-color;
+  &:focus {
+    outline: none;
+  }
+  &:focus ~ label,
+  &:valid ~ label {
+    top: -14px;
+    font-size: 12px;
+    color: $hl-color;
+  }
+  &:focus ~ .bar:before {
+    width: 100%;
+  }
+}
+
+input[type="password"] {
+  letter-spacing: 0.3em;
+}
+
+label {
+  color: $muted-color;
+  font-size: 16px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 4px;
+  top: 4px;
+  transition: $trans-time ease all;
+}
+
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
+  &:before {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 0px;
+    position: absolute;
+    background: $hl-color;
+    transition: $trans-time ease all;
+    left: 0%;
+  }
+}
+
+// BUTTONS // ============================== //
+button {
+  background: #fff;
+  color: mix(black, $muted-color, 25%);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+  &.btn-link {
+    background: $hl-color;
+    color: mix(white, $hl-color, 80%);
+    &:hover {
+      background: darken($hl-color, 5%);
+      color: mix(white, $hl-color, 85%);
+    }
+  }
+  &.submit {
+    background: $hl-color;
+    color: mix(white, $hl-color, 70%);
+    &:hover {
+      background: darken($hl-color, 5%);
+      color: mix(white, $hl-color, 85%);
+    }
+  }
+  &.cancel {
+    background: #eee;
+    &:hover {
+      background: darken(#eee, 5%);
+      color: mix(black, $muted-color, 30%);
+    }
+  }
+  &.danger {
+    background: #b11111;
+    color: white;
+    &:hover {
+      background: darken(#b11111, 5%);
+    }
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: none;
+  -webkit-box-shadow: none;
+  background-color: #EEEEEE;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+a {
+  text-decoration: none;
+  color: #222222;
+  &:visited {
+    color: #222222;
+  }
+  &:hover {
+    color: #2196F3;
+  }
+}

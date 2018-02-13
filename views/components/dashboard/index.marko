@@ -1,55 +1,13 @@
 <div class="dashboard">
-  <div class="row around-xs app-header">
-    <div class="col-xs-2">
-      <div class="box panel uptime">
-        <div class="title">
-          1 year uptime
-        </div>
-        <div class="content">
-          ${input.yearUptime ? input.yearUptime : '-'}%
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="box panel uptime">
-        <div class="title">
-          30 days uptime
-        </div>
-        <div class="content">
-          ${input.monthUptime ? input.monthUptime : '-'}%
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="box panel uptime">
-        <div class="title">
-          7 days uptime
-        </div>
-        <div class="content">
-          ${input.weekUptime ? input.weekUptime : '-'}%
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="box panel uptime">
-        <div class="title">
-          24 hours uptime
-        </div>
-        <div class="content">
-          ${input.dayUptime ? input.dayUptime : '-'}%
-        </div>
-      </div>
-    </div>
-  </div>
   
-  <for (monitor in input.monitorStatusList)>
-    <div class="row monitor ${monitor.isUp ? 'success' : 'danger'}">
-        <div class="col-xs-1">
+  <div class="monitor" for (monitor in input.monitorStatusList)>
+    <div class="row details">
+        <div class="col-xs-3">
           <div class="box">
             <b>${monitor.name}</b>
           </div>
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-4">
           <div class="box">
             ${monitor.url}
           </div>
@@ -59,8 +17,60 @@
             Last checked at <date value=monitor.lastCheck/>
           </div>
         </div>
+        <div class="col-xs-1">
+          <div class="box">
+            <if(monitor.isUp)>
+              <div class="monitor-status success">UP</div>
+            </if>
+            <else>
+              <div class="monitor-status danger">DOWN</div>
+            </else>
+          </div>
+        </div>
     </div>
-  </for>
+    <div class="row around-xs app-header">
+      <div class="col-xs-2">
+        <div class="box panel uptime">
+          <div class="title">
+            1 year uptime
+          </div>
+          <div class="content">
+            ${monitor.yearUptime ? monitor.yearUptime : '100'}%
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="box panel uptime">
+          <div class="title">
+            30 days uptime
+          </div>
+          <div class="content">
+            ${monitor.monthUptime ? monitor.monthUptime : '100'}%
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="box panel uptime">
+          <div class="title">
+            7 days uptime
+          </div>
+          <div class="content">
+            ${monitor.weekUptime ? monitor.weekUptime : '100'}%
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="box panel uptime">
+          <div class="title">
+            24 hours uptime
+          </div>
+          <div class="content">
+            ${monitor.dayUptime ? monitor.dayUptime : '100'}%
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <div class="row panel section-separator">
     <div class="col-xs-12">

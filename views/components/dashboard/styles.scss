@@ -2,6 +2,20 @@
 .dashboard {
   background-color: #FAFBFD;
   padding: 10px 0;
+  .monitor {
+    background-color: white;
+    border: solid 1px #c9c9c9;
+    .details {
+      padding: 0 8px 8px 8px;
+    }
+    .monitor-status {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      text-align: center;
+    }
+  }
   .panel {
     padding: 16px;
     background-color: white;
@@ -9,7 +23,8 @@
     border-top: solid 2px #0488F4;
   }
   .danger {
-    background-color: rgb(255, 103, 103);
+    background-color: #B11111;
+    color: white;
   }
   .success {
     background-color: rgb(155, 209, 155);

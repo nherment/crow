@@ -1,146 +1,188 @@
 <div class="dashboard">
   
-  <div class="monitor" for (monitor in input.monitorStatusList)>
-    <div class="row details">
-        <div class="col-xs-3">
-          <div class="box">
-            <b>${monitor.name}</b>
-          </div>
-        </div>
-        <div class="col-xs-4">
-          <div class="box">
-            ${monitor.url}
-          </div>
-        </div>
-        <div class="col-xs-4">
-          <div class="box">
-            Last checked at <date value=monitor.lastCheck/>
-          </div>
-        </div>
-        <div class="col-xs-1">
-          <div class="box">
-            <if(monitor.isUp)>
-              <div class="monitor-status success">UP</div>
-            </if>
-            <else>
-              <div class="monitor-status danger">DOWN</div>
-            </else>
-          </div>
-        </div>
-    </div>
-    <div class="row around-xs app-header">
-      <div class="col-xs-2">
-        <div class="box panel uptime">
-          <div class="title">
-            1 year uptime
-          </div>
-          <div class="content">
-            ${monitor.yearUptime ? monitor.yearUptime : '100'}%
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-2">
-        <div class="box panel uptime">
-          <div class="title">
-            30 days uptime
-          </div>
-          <div class="content">
-            ${monitor.monthUptime ? monitor.monthUptime : '100'}%
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-2">
-        <div class="box panel uptime">
-          <div class="title">
-            7 days uptime
-          </div>
-          <div class="content">
-            ${monitor.weekUptime ? monitor.weekUptime : '100'}%
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-2">
-        <div class="box panel uptime">
-          <div class="title">
-            24 hours uptime
-          </div>
-          <div class="content">
-            ${monitor.dayUptime ? monitor.dayUptime : '100'}%
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="row panel section-separator">
-    <div class="col-xs-12">
-      <div class="box">
-        Active alerts
-      </div>
-    </div>
-  </div>
+  <h2>
+    Monitors
+  </h2>
+  <table>
+    <colgroup>
+        <col style="width:10%">
+        <col style="width:40%">
+        <col style="width:20%">
+        <col style="width:10%">
+        <col style="width:10%">
+        <col style="width:10%">
+    </colgroup>
+    <thead>
+      <tr>
+        <td colspan="3">
+        </td>
+        <td colspan="4" class="center colgroup-header">
+          Uptime
+        </td>
+      </tr>
+      <tr class="col-header">
+        <td class="center">
+          Status
+        </td>
+        <td>
+          Name
+        </td>
+        <td>
+          Last check
+        </td>
+        <td>
+          1 year
+        </td>
+        <td>
+          30 days
+        </td>
+        <td>
+          7 days
+        </td>
+        <td>
+          24 hours
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="monitor ${monitor.isUp ? 'success' : 'danger'}" for (monitor in input.monitorStatusList)>
+        <td class="center">
+          <if(monitor.isUp)>
+            <div class="monitor-status success">OK</div>
+          </if>
+          <else>
+            <div class="monitor-status danger">DOWN</div>
+          </else>
+        </td>
+        <td class="emphasize">
+          ${monitor.name}
+        </td>
+        <td>
+          <date value=monitor.lastCheck/>
+        </td>
+        <td>
+          ${monitor.yearUptime ? monitor.yearUptime : '100'}%
+        </td>
+        <td>
+          ${monitor.monthUptime ? monitor.monthUptime : '100'}%
+        </td>
+        <td>
+          ${monitor.weekUptime ? monitor.weekUptime : '100'}%
+        </td>
+        <td>
+           ${monitor.dayUptime ? monitor.dayUptime : '100'}%
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>
+    Active alerts
+  </h2>
   <if(!input.activeAlerts)>
-    <div class="row alert">
-      <div class="col-xs-12">
-        <div class="box">
-          There are no active alerts
-        </div>
-      </div>
+    <div class="de-emphasize">
+      There are no active alerts
     </div>
   </if>
-  <for (alert in input.activeAlerts)>
-    <div class="row alert ${alert.closedDate ? 'success' : 'danger'}">
-        <div class="col-xs-1">
-          <div class="box">
-            <b>${alert.monitorName}</b>
-          </div>
-        </div>
-        <div class="col-xs-1">
-          <div class="box">
+  <else>
+    <table>
+      <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:50%">
+      </colgroup>
+      <thead>
+        <tr class="col-header">
+          <td>
+            Monitor
+          </td>
+          <td>
+            Date opened
+          </td>
+          <td>
+            Duration
+          </td>
+          <td>
+            Details
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="danger" for(alert in input.activeAlerts)>
+          <td class="emphasize">
+            ${alert.monitorName}
+          </td>
+          <td>
             <date value=alert.createdDate/>
-          </div>
-        </div>
-        <div class="col-xs-10">
-          <div class="box">
+          </td>
+          <td class="emphasize">
+            <date-diff from=alert.createdDate />
+          </td>
+          <td>
             ${alert.details}
-          </div>
-        </div>
-    </div>
-  </for>
-  
-  <div class="row panel section-separator">
-    <div class="col-xs-12">
-      <div class="box">
-        Closed alerts
-      </div>
-    </div>
-  </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </else>
+
+  <h2>
+    Closed alerts
+  </h2>
   <if(!input.closedAlerts)>
-    <div class="row alert">
-      <div class="col-xs-12">
-        <div class="box">
-          There are no closed alerts
-        </div>
-      </div>
+    <div class="de-emphasize">
+      There are no closed alerts
     </div>
   </if>
-  <for (alert in input.closedAlerts)>
-    <div class="row alert">
-        <div class="col-xs-1">
-          <div class="box">
-            <b>${alert.monitorName}</b>
-          </div>
-        </div>
-        <div class="col-xs-3">
-          <div class="box">
-            <date value=alert.createdDate/> - <date value=alert.closedDate format="MM-DD HH:mm"/>
-          </div>
-        </div>
-        <div class="col-xs-7">
-          <div class="box">
+  <else>
+    <table>
+      <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:10%">
+          <col style="width:40%">
+      </colgroup>
+      <thead>
+        <tr class="col-header">
+          <td>
+            Monitor
+          </td>
+          <td>
+            Date opened
+          </td>
+          <td>
+            Date closed
+          </td>
+          <td>
+            Duration
+          </td>
+          <td>
+            Details
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr for (alert in input.closedAlerts)>
+          <td class="emphasize">
+            ${alert.monitorName}
+          </td>
+          <td>
+            <date value=alert.createdDate/>
+          </td>
+          <td>
+            <date value=alert.closedDate format="MM-DD HH:mm"/>
+          </td>
+          <td class="emphasize">
+            <date-diff from=alert.createdDate to=alert.closedDate />
+          </td>
+          <td>
             ${alert.details}
-          </div>
-        </div>
-    </div>
-  </for>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </else>
+
 </div>

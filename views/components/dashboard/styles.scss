@@ -1,56 +1,62 @@
+@import '../../variables.scss';
 
 .dashboard {
-  background-color: #FAFBFD;
-  padding: 10px 0;
-  .monitor {
-    border: solid 1px #c9c9c9;
-    .details {
-      padding: 0 8px 8px 8px;
+  width: 100%;
+  min-height: 100%;
+  h2 {
+    margin-top: 48px;
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+  .de-emphasize {
+    color: $disabledText;
+  }
+  table {
+    width: 100%;
+    background-color: white;
+    td {
+      padding: 4px;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #f8f8f8;
+    }
+    tbody tr:hover {
+      background-color: #CECECE;
+      &.danger {
+        background-color: $dangerSecondary;
+      }
+      &.success {
+        background-color: $successSecondary;
+      }
+    }
+    .colgroup-header {
+      border-bottom: 1px solid $dn5Blue;
+      font-size: 12px;
+      font-weight: normal;
+    }
+    .col-header td {
+      border-bottom: 2px solid $dn5Blue; 
+    }
+    .center {
+      text-align: center;
+    }
+    .emphasize {
+      font-weight: bold;
     }
     .monitor-status {
-      display: inline-block;
-      margin: 0;
-      padding: 0;
-      width: 100%;
+      margin: 0 4px;
+      padding: 4px 8px;
       text-align: center;
+      border-radius: 3px;
+      &.danger {
+        background-color: $dangerPrimary;
+        color: $lightText;
+      }
+      &.success {
+        background-color: $successPrimary;
+        color: $lightText;
+      }
     }
-  }
-  .panel {
-    padding: 16px;
-    background-color: white;
-    border: solid 1px #f1f1f1;
-    border-top: solid 2px #0488F4;
-  }
-  .danger {
-    background-color: #B11111;
-    color: white;
-  }
-  .success {
-    background-color: rgb(155, 209, 155);
-  }
-  .uptime {
-    min-width: 150px;
-    .title {
-      text-align: left;
-      font-size: 18px;
-      margin-bottom: 16px;
-    }
-    .content {
-      text-align: center;
-      font-size: 32px;
-    }
-  }
-  .monitor {
-    margin: 16px 0;
-    padding: 8px 0;
-  }
-  .alert {
-    margin: 4px 0;
-    padding: 8px 0;
-  }
-  .section-separator {
-    margin: 32px 0 8px 0;
-    font-size: 16px;
-    font-weight: bold;
   }
 }

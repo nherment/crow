@@ -51,6 +51,9 @@ Component.prototype.refreshValue = function() {
       if(duration.minutes() >= 1) {
         formattedValue += duration.minutes() + 'min'
       }
+      if(!formattedValue) {
+        formattedValue += duration.asSeconds() + 's'
+      }
     }
   }
   this.state = {

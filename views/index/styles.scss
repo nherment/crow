@@ -1,12 +1,11 @@
-@import '../../public/flexboxgrid.min.css';
-
-
 html,
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   background-color: white;
   color: #222222;
+  margin: 0;
+  padding: 0;
 }
 
 // VARIABLES // ============================== //
@@ -178,5 +177,18 @@ table {
   td {
     padding: 0;
     margin: 0;
+  }
+}
+
+body {
+  height: 100%;
+  & > .left-menu {
+    display: inline-block;
+    width: 39px;
+    height: 100%;
+  }
+  & > .content {
+    display: inline-block;
+    width: calc(100% - 40px)
   }
 }

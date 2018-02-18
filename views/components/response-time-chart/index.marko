@@ -1,0 +1,13 @@
+<div class="response-time-chart">
+  <svg width="100%" height="${input.chartHeight}px" viewBox="0 0 ${state.width} ${state.chartHeight}">
+    <g>
+      <for(sc in state.statusChecks | status-var=loop)>
+        <rect 
+          x=(loop.getIndex() * (state.barWidth + state.barSpacing))
+          width=state.barWidth
+          y=(state.barsBottom-sc.height)
+          height=sc.height />
+      </for>
+    </g>
+  </svg>
+</div>

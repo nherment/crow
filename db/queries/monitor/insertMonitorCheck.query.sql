@@ -113,6 +113,10 @@ WITH inserted AS (
   DELETE FROM status_checks AS sc
   USING inserted AS i
   WHERE sc.created_date < DATE_TRUNC('day', i.created_date)
+), delete_old_status_checks_hourly AS (
+  DELETE FROM status_checks_hourly AS sch
+  USING inserted AS i
+  WHERE sch.hour < (i.created_date - INTERVAL '7 days')
 )
 SELECT * FROM opened_failure_report
 UNION

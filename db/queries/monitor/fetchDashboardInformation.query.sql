@@ -9,7 +9,8 @@ WITH monitor_status AS (
       'dayUptime', day_uptime.uptime,
       'weekUptime', week_uptime.uptime,
       'monthUptime', month_uptime.uptime,
-      'yearUptime', year_uptime.uptime
+      'yearUptime', year_uptime.uptime,
+      'statusChecks', sc.list
     ) ORDER BY m.name ASC, m.url ASC) AS list
   FROM monitors AS m
   LEFT JOIN failure_reports AS fr ON fr.monitor_id = m.id AND fr.closed_date IS NULL
@@ -82,6 +83,12 @@ WITH monitor_status AS (
       GROUP BY m.id
     ) AS d
   ) AS year_uptime ON year_uptime.monitor_id = m.id
+  LEFT JOIN LATERAL (
+    SELECT monitor_id, ARRAY_AGG(ROW_TO_JSON(status_checks) ORDER BY created_date ASC) AS list
+    FROM status_checks 
+    WHERE created_date > NOW() - INTERVAL '24 hours'
+    GROUP BY monitor_id
+  ) AS sc ON sc.monitor_id = m.id
   WHERE m.deleted = FALSE
 ), active_alerts AS (
   SELECT 

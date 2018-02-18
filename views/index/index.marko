@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <title>DN5 monitoring</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="/crow-small.png"/>
     <lasso-head/>
 </head>
 <body>
     <app-header ${input} />
     <if(input.query && input.query.err)>
-      <div class="alert danger">${input.query.err}</div>
+     <div class="alert danger">${input.query.err}</div>
     </if>
     <if(input.page === 'settings')>
-        <settings ${input} />
+      <settings ${input} />
     </if>
     <else-if(input.page === 'account')>
-        <account ${input} />
+      <account ${input} />
     </else-if>
     <else>
-        <dashboard ${input} />
+      <dashboard ${input} />
     </else>
     <lasso-body />
 </body>

@@ -1,6 +1,6 @@
 <div class="settings">
   <h1>Create a new monitor</h1>
-  <form action="/monitor" class="inline" method="POST">
+  <form action="/monitor" class="inline monitor" method="POST">
     <div class="row">
       <div class="col-xs-2">
         <div class="box">
@@ -51,7 +51,7 @@
   </form>
 
   <h1>Monitors</h1>
-  <form action="/monitor" class="inline" method="POST" for(monitor in state.monitors)>
+  <form action="/monitor" class="inline monitor" method="POST" for(monitor in state.monitors)>
     <input type="hidden" name="id" value=monitor.id />
     <div class="row">
       <div class="col-xs-2">

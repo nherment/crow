@@ -51,7 +51,7 @@ textarea {
   font-size: 14px;
   padding: 4px 4px 4px 5px;
   display: block;
-  width: 100%;
+  width: calc(100% - 9px);
   border: none;
   border-radius: 0;
   border-bottom: 1px solid $muted-color;

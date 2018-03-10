@@ -5,6 +5,11 @@
     textarea {
       height: 200px;
     }
-    
+    &.monitor {
+      border: 1px solid #222222;
+      border-radius: 5px;
+      padding: 8px;
+      margin: 4px;
+    }
   }
 }

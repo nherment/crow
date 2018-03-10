@@ -36,6 +36,14 @@
       </div>
       <div class="col-xs-2">
         <div class="box">
+          <div class="group">
+            <textarea name="validationLogic" >return true || 'Error message';</textarea>
+            <label>Validation logic</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="box">
           <button class="submit">Create</button>
         </div>
       </div>
@@ -75,6 +83,14 @@
           <div class="group">
             <input type="number" name="frequencySeconds" required="required" value=monitor.frequencySeconds/><span class="highlight"></span><span class="bar"></span>
             <label>Check frequency</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="box">
+          <div class="group">
+            <textarea name="validationLogic" >${monitor.validationLogic}</textarea>
+            <label>Validation logic</label>
           </div>
         </div>
       </div>

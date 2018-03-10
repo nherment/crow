@@ -1,0 +1,1 @@
+ALTER TABLE monitors ADD COLUMN validation_logic TEXT;

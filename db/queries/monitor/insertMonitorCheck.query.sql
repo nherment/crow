@@ -8,7 +8,8 @@ WITH inserted AS (
     $1 AS monitor_id, 
     $2 AS succeeded, 
     $3 AS response_time, 
-    $4 AS details
+    $4 AS details,
+    NOW() AS created_date
 
 ), opened_failure_report AS (
 

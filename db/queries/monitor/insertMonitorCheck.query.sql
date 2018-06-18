@@ -5,10 +5,10 @@
 WITH inserted AS (
 
   SELECT 
-    $1 AS monitor_id, 
-    $2 AS succeeded, 
-    $3 AS response_time, 
-    $4 AS details,
+    $1::INT AS monitor_id, 
+    $2::BOOLEAN AS succeeded, 
+    $3::INT AS response_time, 
+    $4::TEXT AS details,
     NOW() AS created_date
 
 ), opened_failure_report AS (

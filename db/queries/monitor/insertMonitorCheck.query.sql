@@ -11,7 +11,7 @@ WITH args AS (
     $4::TEXT AS details
 
 ), delete_old_status_checks AS (
-  DELETE FROM status_checks AS sc USING args AS args WHERE monitor_id = args.monitor_id
+  DELETE FROM status_checks AS sc USING args AS args WHERE sc.monitor_id = args.monitor_id
 ), inserted AS (
   INSERT INTO status_checks (monitor_id, succeeded, response_time, details)
   (

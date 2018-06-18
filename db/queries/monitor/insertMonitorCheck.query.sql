@@ -4,9 +4,11 @@
 -- $4: message
 WITH inserted AS (
 
-  INSERT INTO status_checks (monitor_id, succeeded, response_time, details)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *
+  SELECT 
+    $1 AS monitor_id, 
+    $2 AS succeeded, 
+    $3 AS response_time, 
+    $4 AS details
 
 ), opened_failure_report AS (
 
@@ -30,13 +32,9 @@ WITH inserted AS (
   RETURNING fr.monitor_id, fr.created_date, fr.closed_date, fr.details
 
 ), delete_old_status_checks AS (
-  DELETE FROM status_checks AS sc
-  USING inserted AS i
-  WHERE sc.created_date < DATE_TRUNC('day', i.created_date)
+  DELETE FROM status_checks
 ), delete_old_status_checks_hourly AS (
-  DELETE FROM status_checks_hourly AS sch
-  USING inserted AS i
-  WHERE sch.hour < (i.created_date - INTERVAL '7 days')
+  DELETE FROM status_checks_hourly
 )
 SELECT * FROM opened_failure_report
 UNION

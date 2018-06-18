@@ -2,15 +2,21 @@
 -- $2: succeeded TRUE|FALSE
 -- $3: responseTime in millisecs
 -- $4: message
-WITH inserted AS (
+WITH args AS (
 
   SELECT 
     $1::INT AS monitor_id, 
     $2::BOOLEAN AS succeeded, 
     $3::INT AS response_time, 
-    $4::TEXT AS details,
-    NOW() AS created_date
+    $4::TEXT AS details
 
+), delete_old_status_checks AS (
+  DELETE FROM status_checks AS sc USING args AS args WHERE id = args.monitor_id
+), inserted AS (
+  INSERT INTO status_checks (monitor_id, succeeded, response_time, details)
+  (
+    SELECT args.monitor_id, args.succeeded, args.response_time, args.details FROM args
+  )
 ), opened_failure_report AS (
 
   INSERT INTO failure_reports (monitor_id, created_date, details)
@@ -32,10 +38,6 @@ WITH inserted AS (
     AND i.succeeded = TRUE
   RETURNING fr.monitor_id, fr.created_date, fr.closed_date, fr.details
 
-), delete_old_status_checks AS (
-  DELETE FROM status_checks
-), delete_old_status_checks_hourly AS (
-  DELETE FROM status_checks_hourly
 )
 SELECT * FROM opened_failure_report
 UNION

@@ -16,7 +16,7 @@ WITH args AS (
   INSERT INTO status_checks (monitor_id, succeeded, response_time, details)
   (
     SELECT args.monitor_id, args.succeeded, args.response_time, args.details FROM args
-  )
+  ) RETURNING *
 ), opened_failure_report AS (
 
   INSERT INTO failure_reports (monitor_id, created_date, details)

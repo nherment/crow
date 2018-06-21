@@ -60,6 +60,15 @@ function startWebServer(callback) {
   var app = express()
   app.enable('trust proxy', 'loopback')
   app.disable('x-powered-by')
+
+  if(process.env.FORCE_TLS) {
+    app.use(express_enforces_ssl());
+    app.use(hsts({
+      maxAge: 31536000, // 1 year
+      includeSubDomains: true, // Must be enabled for preload to be approved
+      preload: true
+    }))
+  }
    
   if(conf.isProduction) {
     app.use(limiter)

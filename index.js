@@ -16,6 +16,8 @@ const cluster = require('./lib/cluster.js')
 const RateLimit = require('express-rate-limit')
 const os = require('os')
 const conf = require('./lib/conf.js')
+const enforcesSsl = require('express-enforces-ssl')
+const hsts = require('hsts')
 
 const migrations = require('./lib/migrations.js')
 const monitoringWorker = require('./lib/monitor/MonitoringWorker.js')
@@ -62,7 +64,7 @@ function startWebServer(callback) {
   app.disable('x-powered-by')
 
   if(process.env.FORCE_TLS) {
-    app.use(express_enforces_ssl());
+    app.use(enforcesSsl());
     app.use(hsts({
       maxAge: 31536000, // 1 year
       includeSubDomains: true, // Must be enabled for preload to be approved
